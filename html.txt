@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>OTP Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate OTP</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('generate_otp_route') }}" method="POST">
+            <input type="text" name="phone_number" placeholder="Enter phone number" required>
+            <input type="number" name="otp_count" placeholder="Number of OTPs" required min="1">
+            <button type="submit">Generate OTP</button>
+        </form>
+    </div>
+</body>
+</html>
